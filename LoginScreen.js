@@ -14,23 +14,29 @@ import { RFValue } from "react-native-responsive-fontsize";
 import * as Google from "expo-google-app-auth";
 import firebase from "firebase";
 
+import AppLoading from "expo-app-loading";
+import * as Font from "expo-font";
 
-export default function LoginScreen() {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       fontsLoaded: false
-//     };
-//   }
+// let customFonts = {
+//   "Bubblegum-Sans": require("../assets/fonts/BubblegumSans-Regular.ttf")
+// };
 
-//   async function loadFontsAsync() {
-//     await Font.loadAsync(customFonts);
-//     this.setState({ fontsLoaded: true });
-//   }
+export default class LoginScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      fontsLoaded: false
+    };
+  }
 
-//   componentDidMount() {
-//     loadFontsAsync();
-//   }
+  async _loadFontsAsync() {
+    await Font.loadAsync(customFonts);
+    this.setState({ fontsLoaded: true });
+  }
+
+  componentDidMount() {
+    this._loadFontsAsync();
+  }
 
   isUserEqual = (googleUser, firebaseUser) => {
     if (firebaseUser) {
@@ -54,7 +60,7 @@ export default function LoginScreen() {
     var unsubscribe = firebase.auth().onAuthStateChanged(firebaseUser => {
       unsubscribe();
       // Check if we are already signed-in Firebase with the correct user.
-      if (!isUserEqual(googleUser, firebaseUser)) {
+      if (!this.isUserEqual(googleUser, firebaseUser)) {
         // Build Firebase credential with the Google ID token.
         var credential = firebase.auth.GoogleAuthProvider.credential(
           googleUser.idToken,
@@ -110,7 +116,7 @@ export default function LoginScreen() {
       });
 
       if (result.type === "success") {
-        onSignIn(result);
+        this.onSignIn(result);
         return result.accessToken;
       } else {
         return { cancelled: true };
@@ -121,27 +127,32 @@ export default function LoginScreen() {
     }
   };
 
-   return (
+  render() {
+    if (!this.state.fontsLoaded) {
+      return <AppLoading />;
+    } else {
+      return (
         <View style={styles.container}>
           <SafeAreaView style={styles.droidSafeArea} /> 
           <View style={styles.appTitle}> 
-            <Text style={styles.appTitleText}>{`Authentication`}</Text>
+            <Text style={styles.appTitleText}>{`Mood Setter\nApp`}</Text>
           </View>
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.button}
-              onPress={() => signInWithGoogleAsync()}
+              onPress={() => this.signInWithGoogleAsync()}
             >
-             
+
               <Text style={styles.googleText}>Sign in with Google</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.cloudContainer}>
-          
           </View>
         </View>
       );
     }
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
