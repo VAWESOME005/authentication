@@ -1,36 +1,47 @@
-import React, { Component } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  SafeAreaView,
-  Platform,
-  StatusBar,
-  Image,
-  Dimensions
-} from "react-native";
-import { createSwitchNavigator, createAppContainer } from "react-navigation";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { RFValue } from "react-native-responsive-fontsize";
-import * as Google from "expo-google-app-auth";
-import firebase from "firebase";
-import Constants from 'expo-constants';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { Provider } from 'react-redux';
-import { applyMiddleware, createStore } from 'redux';
-import thunk from 'redux-thunk';
-import AuthMenu from './components/auth/menu';
-import rootReducer from './reducers';
-import LoginScreen from './LoginScreen'
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow strict-local
+ */
 
-    const AppSwitchNavigator = createSwitchNavigator({ 
-      LoginScreen : LoginScreen,
-      AuthMenu : AuthMenu
-     });
-     
-     const AppNavigator = createAppContainer(AppSwitchNavigator);
-     
-    export default function App(){
-      return <AppNavigator />;
-   
-    }
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+
+
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import LoginScreen from "./src/screens/Login"
+
+
+const Stack = createNativeStackNavigator();
+
+function MyStack() {
+  return (
+    <Stack.Navigator 
+      screenOptions={{
+        headerShown: false
+      }}>
+      <Stack.Screen name="LoginScreen" component={LoginScreen} />
+    </Stack.Navigator>
+  );
+}
+
+const App = () => {
+
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
+  );
+
+  // return (
+  //   <View>
+  //     <Text>122312</Text>
+  //   </View>
+  // );
+};
+
+export default App
+

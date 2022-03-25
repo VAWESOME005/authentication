@@ -1,43 +1,4 @@
 {
-  "expo": {
-    "name": "authentication",
-    "slug": "authentication",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png",
-      "config": {
-        "firebase": {
-          "apiKey": "AIzaSyAFBNOOQlPerQT3kLuVCCayyfaKkHSy6BY",
-          "authDomain": "authentication-88122.firebaseapp.com",
-          "databaseURL": "https://authentication-88122-default-rtdb.firebaseio.com",
-          "projectId": "authentication-88122",
-          "storageBucket": "authentication-88122.appspot.com",
-          "messagingSenderId": "765657848640",
-          "appId": "1:765657848640:web:41984f0399f1e5d80b78a5"
-        }
-      }
-    }
-  }
+  "name": "authenticate",
+  "displayName": "authenticate"
 }
